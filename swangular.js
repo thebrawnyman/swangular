@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  // Check if this is Tristan Edwards's SweetAlert
+  var isProper = !swal.hasOwnProperty('queue');
+
   // Check we have sweet alert js included
   if (angular.isUndefined(window.swal)) {
     throw 'Please make sure Sweet Alert 2 is included! https://github.com/limonte/sweetalert2';
@@ -128,7 +131,12 @@
 
             var locals = setup.locals;
 
-            options.html = setup.html;
+            if (isProper) {
+              var $node = angular.element(setup.html);
+              if ($node.length) options.content = $node[0];
+            } else {
+              options.html = setup.html;
+            }
 
             scope = scope ? scope.$new() : $rootScope.$new();
 
@@ -162,19 +170,20 @@
             }
 
             var prom = $q.when(swal(options));
-            var html = document.getElementsByClassName('swal2-modal')[0];
+            var html = document.getElementsByClassName(isProper ? 'swal-modal' : 'swal2-modal')[0];
 
-            // If there is a form, trigger the button on press of enter button
-            var form = html.getElementsByTagName('form');
-            if (form[0]) {
-              form[0].onkeyup = function(event) {
-                event.stopPropagation();
-                if (event.keyCode === 13) {
-                  html.querySelector('.swal2-confirm').click();
-                }
-              };
+            if (html) {
+              // If there is a form, trigger the button on press of enter button
+              var form = html.getElementsByTagName('form');
+              if (form[0]) {
+                form[0].onkeyup = function(event) {
+                  event.stopPropagation();
+                  if (event.keyCode === 13) {
+                    html.querySelector(isProper ? '.swal-button--confirm' : '.swal2-confirm').click();
+                  }
+                };
+              }
             }
-
             $compile(html)(scope);
 
             return prom;

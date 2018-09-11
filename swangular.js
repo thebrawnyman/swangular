@@ -199,7 +199,7 @@
       }
 
       function _getTemplate(tmpl) {
-        return $http.get(tmpl, { cache: $templateCache }).then(function(res) {
+        return $templateCache.get(tmpl) || $http.get(tmpl, { cache: $templateCache }).then(function(res) {
           return res.data || '';
         });
       }

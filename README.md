@@ -6,7 +6,7 @@
 swangular
 ======
 
-An AngularJS wrapper for [SweetAlert2](https://github.com/limonte/sweetalert2) with some added functionality like binding to scope/controller, using html templates...
+An AngularJS wrapper for [Tristan Edwards](https://tristanedwards.me)' [SweetAlert 2](https://sweetalert.js.org) with some added functionality like binding to scope/controller, using html templates...
 
 Getting Started
 -------
@@ -124,7 +124,8 @@ All the options below are unique to Swangular or have added functionality compar
 | ---------------- | ------- | ------------- 
 | html             | `string`| This can be use in the same way as SweetAlert2 `html`. Additionally, if a `scope` or `controller` options are passed, this html will be compiled and the markup will be bound to that particular scope/controller.
 | htmlTemplate     | `string`| Has the same function as `html`, but here you can pass a path to an external template.
-| scope            | `Object`| Any passed html will be compiled and bound to this scope. If both scope and controller are passed, this scope will be used as the parent scope for the controller.
+| scope            | `Object`| Any passed html will be compiled and bound to this scope. If both `scope` and `controller` are passed, this scope will be used as the parent scope for the controller.
+| newScope         | `Boolean`| Used in conjunction with `scope` and `controller`. By default, scope is used as the parent for the creation of a new child scope which the controller is bound to. If you would rather bind the controller to the supplied scope directly, you can set this to `false`.
 | controller       | `string`| Any passed html will be compiled and bound to this controller.
 | controllerAs     | `string`| If you use controllerAs syntax in your markup, you can pass the correct string here.
 | preConfirm       | `string` or `function()`| When a function, it will behave just like in SweetAlert2. When a string is passed, it will use this string to look for a function on the passed `controller`. You have to make sure there is a function with the specified name on that controller. Should return a promise.

@@ -117,7 +117,7 @@
           })
           .then(function(setup) {
             var scope = options.scope,
-              newScope = options.newScope? options.newScope:true,
+              newScope = options.hasOwnProperty('newScope')? options.newScope:true,
               controller = options.controller,
               controllerAsOption = options.controllerAs,
               preConfirm = options.preConfirm;

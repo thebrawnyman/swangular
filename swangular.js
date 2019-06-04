@@ -117,6 +117,7 @@
           })
           .then(function(setup) {
             var scope = options.scope,
+              replaceScope = options.replaceScope? options.replaceScope:false,
               controller = options.controller,
               controllerAsOption = options.controllerAs,
               preConfirm = options.preConfirm;
@@ -138,7 +139,9 @@
               options.html = setup.html;
             }
 
-            scope = scope ? scope.$new() : $rootScope.$new();
+            if (replaceScope && scope) {} else {
+              scope = scope ? scope.$new() : $rootScope.$new();
+            }
 
             if (controller) {
               var controllerAs;
